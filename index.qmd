@@ -1,0 +1,1289 @@
+---
+title: "MODELOS PROBABILISTICOS DISCRETOS"
+subtitle: "Distribución Binomial"
+author: 
+  - name: Dagoberto Salgado Horta
+    affiliation: "Universidad del Tolima"
+    affiliation-url: "https://www.ut.edu.co/"
+date: today
+lang: es
+title-block-banner: "#98b6ed"
+
+format:
+  html:
+    page-layout: full
+    fontsize: 14pt
+    toc: true
+    toc-location: right
+    number-sections: true
+    code-fold: true
+    code-summary: "Ver código"
+    theme: dark
+    highlight-style: "BBE5ED"
+    html-math-method: katex
+    smooth-scroll: true
+    link-external-newwindow: true
+    code-overflow: scroll
+    favicon: favicon.ico
+    
+editor: visual
+
+knitr:
+  opts_chunk:
+    message: false
+    warning: false
+    fig.align: center
+    fig.width: 6
+    fig.height: 6
+    out.width: "70%"
+---
+
+```{=html}
+<div style="position:absolute; top:10px; right:10px;">
+<img src="Logo_ut.png" width="150">
+</div>
+```
+
+```{=html}
+<style>
+body{
+  background-color:#f7f6ed;
+  font-size:130%;
+  text-align:justify;
+}
+</style>
+```
+
+# .Cargar paquetes
+
+```{r}
+ipak <- function(pkg){
+
+  options(repos = c(CRAN="https://cloud.r-project.org"))
+
+  new.pkg <- pkg[!(pkg %in% rownames(installed.packages()))]
+
+  if(length(new.pkg)) install.packages(new.pkg, dependencies = TRUE)
+
+  invisible(lapply(pkg, function(p)
+    suppressPackageStartupMessages(library(p, character.only = TRUE))
+  ))
+}
+
+packages <- c("tidyverse","kableExtra")
+
+ipak(packages)
+```
+
+# Introducción
+
+La **distribución de Poisson** es una distribución de probabilidad discreta utilizada para modelar el número de veces que ocurre un determinado evento durante un intervalo específico de tiempo, espacio, longitud, área o volumen.
+
+Algunos ejemplos de situaciones que pueden modelarse mediante una distribución de Poisson son:
+
+- Número de ciudadanos que llegan a una oficina pública durante una hora.
+- Número de llamadas recibidas por una central telefónica.
+- Número de accidentes ocurridos en una carretera durante un día.
+- Número de solicitudes recibidas por una entidad pública.
+- Número de errores encontrados en una página.
+- Número de defectos encontrados en un producto.
+- Número de pacientes que llegan a un servicio de urgencias durante una hora.
+
+La variable aleatoria se representa como:
+
+$$X\sim Poisson(\lambda)$$
+
+donde $\lambda>0$ representa el **número promedio de ocurrencias del evento durante el intervalo considerado**.
+
+------------------------------------------------------------------------
+
+# 1. Características de la distribución de Poisson
+
+Para utilizar la distribución de Poisson como modelo probabilístico, se consideran generalmente las siguientes condiciones.
+
+## 1.1. Eventos independientes
+
+La ocurrencia de un evento no debe afectar directamente la ocurrencia de otro.
+
+Por ejemplo, la llegada de un ciudadano a una oficina pública no debería determinar que otro ciudadano llegue posteriormente.
+
+## 1.2. Tasa promedio constante
+
+La tasa promedio de ocurrencia debe mantenerse aproximadamente constante durante el intervalo estudiado.
+
+Por ejemplo:
+
+> Una oficina pública recibe, en promedio, 6 solicitudes por hora.
+
+En este caso:
+
+$$\lambda=6$$
+
+## 1.3. Eventos individuales
+
+En intervalos suficientemente pequeños, la probabilidad de que ocurran dos o más eventos simultáneamente debe ser muy pequeña.
+
+## 1.4. Variable discreta
+
+La variable aleatoria solamente puede tomar valores enteros no negativos:
+
+$$X=0,1,2,3,\ldots$$
+
+------------------------------------------------------------------------
+
+# 2. Función de probabilidad
+
+La función de probabilidad de una variable aleatoria Poisson está dada por:
+
+$$\boxed{
+P(X=x)=\frac{e^{-\lambda}\lambda^x}{x!}
+}$$
+
+para:
+
+$$x=0,1,2,3,\ldots$$
+
+donde:
+
+|  Símbolo  | Significado                                |
+|:---------:|--------------------------------------------|
+|    $X$    | Variable aleatoria                         |
+|    $x$    | Número específico de eventos               |
+| $\lambda$ | Número promedio de eventos                 |
+|    $e$    | Número de Euler, aproximadamente $2.71828$ |
+|   $x!$    | Factorial de $x$                           |
+
+------------------------------------------------------------------------
+
+# 3. El factorial
+
+El factorial de un número entero positivo se define como:
+
+$$x!=x(x-1)(x-2)\cdots 2(1)$$
+
+Por ejemplo:
+
+$$5!=5(4)(3)(2)(1)=120$$
+
+También:
+
+$$3!=6$$
+
+$$2!=2$$
+
+$$1!=1$$
+
+Por definición:
+
+$$0!=1$$
+
+------------------------------------------------------------------------
+
+# 4. Interpretación del parámetro $\lambda$
+
+El parámetro $\lambda$ representa el **número promedio de eventos que ocurren en el intervalo estudiado**.
+
+Por ejemplo, si una oficina recibe en promedio 8 ciudadanos por hora:
+
+$$\lambda=8$$
+
+Entonces:
+
+$$X\sim Poisson(8)$$
+
+Es importante tener presente que $\lambda$ depende del intervalo.
+
+Si se indica:
+
+> Llegan 12 ciudadanos por hora.
+
+entonces:
+
+$$\lambda=12$$
+
+para un intervalo de una hora.
+
+Pero para 30 minutos:
+
+$$\lambda=12\left(\frac{30}{60}\right)=6$$
+
+Por tanto:
+
+$$X_{30}\sim Poisson(6)$$
+
+------------------------------------------------------------------------
+
+# 5. Ejemplo 1: probabilidad de exactamente $x$ eventos
+
+Una oficina pública recibe en promedio **4 solicitudes por hora**.
+
+¿Cuál es la probabilidad de recibir exactamente **3 solicitudes durante una hora**?
+
+## Paso 1. Identificar $\lambda$
+
+Tenemos:
+
+$$\lambda=4$$
+
+y:
+
+$$x=3$$
+
+## Paso 2. Aplicar la fórmula
+
+$$P(X=3)=
+\frac{e^{-4}4^3}{3!}$$
+
+Como:
+
+$$3!=6$$
+
+entonces:
+
+$$P(X=3)=
+\frac{e^{-4}(64)}{6}$$
+
+Por tanto:
+
+$$P(X=3)\approx0.1954$$
+
+En porcentaje:
+
+$$\boxed{P(X=3)\approx19.54\%}$$
+
+### Interpretación
+
+Existe aproximadamente un **19.54 % de probabilidad** de que la oficina reciba exactamente 3 solicitudes durante una hora.
+
+------------------------------------------------------------------------
+
+# 6. Probabilidad de cero eventos
+
+Cuando se desea calcular la probabilidad de que no ocurra ningún evento:
+
+$$P(X=0)$$
+
+se utiliza:
+
+$$P(X=0)=
+\frac{e^{-\lambda}\lambda^0}{0!}$$
+
+Como:
+
+$$\lambda^0=1$$
+
+y:
+
+$$0!=1$$
+
+obtenemos:
+
+$$\boxed{
+P(X=0)=e^{-\lambda}
+}$$
+
+## Ejemplo 2
+
+Una entidad recibe en promedio **5 solicitudes por hora**.
+
+¿Cuál es la probabilidad de no recibir ninguna solicitud durante una hora?
+
+Tenemos:
+
+$$\lambda=5$$
+
+Entonces:
+
+$$P(X=0)=e^{-5}$$
+
+Por tanto:
+
+$$P(X=0)\approx0.006738$$
+
+En porcentaje:
+
+$$\boxed{P(X=0)\approx0.674\%}$$
+
+------------------------------------------------------------------------
+
+# 7. Probabilidad de al menos un evento
+
+La expresión:
+
+$$P(X\geq1)$$
+
+significa que queremos calcular la probabilidad de que ocurra **uno o más eventos**.
+
+Utilizamos el complemento:
+
+$$P(X\geq1)=1-P(X=0)$$
+
+Como:
+
+$$P(X=0)=e^{-\lambda}$$
+
+obtenemos:
+
+$$\boxed{
+P(X\geq1)=1-e^{-\lambda}
+}$$
+
+## Ejemplo 3
+
+Una oficina recibe en promedio 3 ciudadanos por hora.
+
+¿Cuál es la probabilidad de recibir al menos un ciudadano durante una hora?
+
+Tenemos:
+
+$$\lambda=3$$
+
+Entonces:
+
+$$P(X\geq1)=1-e^{-3}$$
+
+Por tanto:
+
+$$P(X\geq1)\approx0.9502$$
+
+Es decir:
+
+$$\boxed{P(X\geq1)\approx95.02\%}$$
+
+------------------------------------------------------------------------
+
+# 8. Probabilidad acumulada
+
+Si queremos calcular la probabilidad de que ocurran como máximo $k$ eventos:
+
+$$P(X\leq k)$$
+
+debemos sumar las probabilidades desde 0 hasta $k$:
+
+$$\boxed{
+P(X\leq k)=
+\sum_{x=0}^{k}
+\frac{e^{-\lambda}\lambda^x}{x!}
+}$$
+
+## Ejemplo 4
+
+Una central recibe en promedio **4 llamadas por hora**.
+
+¿Cuál es la probabilidad de recibir como máximo 2 llamadas durante una hora?
+
+Queremos:
+
+$$P(X\leq2)$$
+
+Por tanto:
+
+$$P(X\leq2)
+=
+P(X=0)+P(X=1)+P(X=2)$$
+
+Es decir:
+
+$$P(X\leq2)
+=
+\frac{e^{-4}4^0}{0!}
++
+\frac{e^{-4}4^1}{1!}
++
+\frac{e^{-4}4^2}{2!}$$
+
+El resultado es:
+
+$$\boxed{P(X\leq2)\approx0.2381}$$
+
+Por tanto:
+
+$$\boxed{P(X\leq2)\approx23.81\%}$$
+
+------------------------------------------------------------------------
+
+# 9. Probabilidad de más de $k$ eventos
+
+Para calcular:
+
+$$P(X>k)$$
+
+es conveniente utilizar el complemento:
+
+$$\boxed{
+P(X>k)=1-P(X\leq k)
+}$$
+
+## Ejemplo 5
+
+Una oficina recibe en promedio 6 ciudadanos por hora.
+
+¿Cuál es la probabilidad de recibir más de 8 ciudadanos durante una hora?
+
+Tenemos:
+
+$$X\sim Poisson(6)$$
+
+Queremos:
+
+$$P(X>8)$$
+
+Utilizamos:
+
+$$P(X>8)=1-P(X\leq8)$$
+
+El resultado es:
+
+$$\boxed{P(X>8)\approx0.1528}$$
+
+Es decir:
+
+$$\boxed{15.28\%}$$
+
+------------------------------------------------------------------------
+
+# 10. Probabilidad entre dos valores
+
+Si queremos calcular:
+
+$$P(a\leq X\leq b)$$
+
+podemos utilizar:
+
+$$\boxed{
+P(a\leq X\leq b)
+=
+P(X\leq b)-P(X\leq a-1)
+}$$
+
+## Ejemplo 6
+
+Supongamos:
+
+$$X\sim Poisson(5)$$
+
+¿Cuál es la probabilidad de que ocurran entre 3 y 7 eventos?
+
+Queremos:
+
+$$P(3\leq X\leq7)$$
+
+Utilizamos:
+
+$$P(3\leq X\leq7)
+=
+P(X\leq7)-P(X\leq2)$$
+
+El resultado es aproximadamente:
+
+$$\boxed{P(3\leq X\leq7)\approx0.8664}$$
+
+Por tanto:
+
+$$\boxed{P(3\leq X\leq7)\approx86.64\%}$$
+
+------------------------------------------------------------------------
+
+# 11. Valor esperado
+
+Para una variable aleatoria:
+
+$$X\sim Poisson(\lambda)$$
+
+el valor esperado es:
+
+$$\boxed{
+E(X)=\lambda
+}$$
+
+Por ejemplo, si una oficina recibe en promedio 8 ciudadanos por hora:
+
+$$E(X)=8$$
+
+Esto significa que, a largo plazo, el número promedio de ciudadanos que llegan durante una hora será 8.
+
+------------------------------------------------------------------------
+
+# 12. Varianza
+
+La varianza de una distribución de Poisson es:
+
+$$\boxed{
+Var(X)=\lambda
+}$$
+
+Por ejemplo, si:
+
+$$\lambda=9$$
+
+entonces:
+
+$$Var(X)=9$$
+
+------------------------------------------------------------------------
+
+# 13. Desviación estándar
+
+La desviación estándar se obtiene mediante:
+
+$$\sigma=\sqrt{Var(X)}$$
+
+Como:
+
+$$Var(X)=\lambda$$
+
+tenemos:
+
+$$\boxed{
+\sigma=\sqrt{\lambda}
+}$$
+
+Si:
+
+$$\lambda=9$$
+
+entonces:
+
+$$\sigma=\sqrt{9}=3$$
+
+------------------------------------------------------------------------
+
+# 14. Coeficiente de variación
+
+El coeficiente de variación se define como:
+
+$$CV=
+\frac{\sigma}{\mu}\times100$$
+
+En Poisson:
+
+$$\mu=\lambda$$
+
+y:
+
+$$\sigma=\sqrt{\lambda}$$
+
+Por tanto:
+
+$$CV=
+\frac{\sqrt{\lambda}}{\lambda}\times100$$
+
+Simplificando:
+
+$$\boxed{
+CV=\frac{100}{\sqrt{\lambda}}\%
+}$$
+
+## Ejemplo 7
+
+Si:
+
+$$\lambda=25$$
+
+entonces:
+
+$$CV=
+\frac{100}{\sqrt{25}}$$
+
+$$CV=
+\frac{100}{5}$$
+
+Por tanto:
+
+$$\boxed{CV=20\%}$$
+
+------------------------------------------------------------------------
+
+# 15. Función generadora de momentos
+
+Para:
+
+$$X\sim Poisson(\lambda)$$
+
+la función generadora de momentos es:
+
+$$\boxed{
+M_X(t)=e^{\lambda(e^t-1)}
+}$$
+
+Esta función permite obtener los momentos de la distribución.
+
+En particular:
+
+$$E(X)=\lambda$$
+
+y:
+
+$$Var(X)=\lambda$$
+
+------------------------------------------------------------------------
+
+# 16. Función generadora de probabilidades
+
+La función generadora de probabilidades está dada por:
+
+$$\boxed{
+G_X(s)=e^{\lambda(s-1)}
+}$$
+
+Esta función es especialmente útil para estudiar propiedades de la distribución y la suma de variables aleatorias independientes.
+
+------------------------------------------------------------------------
+
+# 17. Propiedad de aditividad
+
+Una propiedad fundamental de la distribución de Poisson es la **aditividad**.
+
+Si:
+
+$$X_1\sim Poisson(\lambda_1)$$
+
+y:
+
+$$X_2\sim Poisson(\lambda_2)$$
+
+son variables aleatorias independientes, entonces:
+
+$$\boxed{
+X_1+X_2\sim Poisson(\lambda_1+\lambda_2)
+}$$
+
+## Ejemplo 8
+
+Una oficina recibe:
+
+- 4 solicitudes por hora durante la mañana.
+- 3 solicitudes por hora durante la tarde.
+
+Entonces:
+
+$$X_1\sim Poisson(4)$$
+
+y:
+
+$$X_2\sim Poisson(3)$$
+
+Si son independientes:
+
+$$X_1+X_2\sim Poisson(4+3)$$
+
+por tanto:
+
+$$\boxed{
+X_1+X_2\sim Poisson(7)
+}$$
+
+------------------------------------------------------------------------
+
+# 18. Cambio de intervalo
+
+Este procedimiento es fundamental para resolver problemas de Poisson.
+
+Si conocemos una tasa promedio para un determinado intervalo, debemos ajustar $\lambda$ cuando cambia el intervalo.
+
+La fórmula general es:
+
+$$\boxed{
+\lambda_{nuevo}
+=
+\lambda_{original}
+\left(
+\frac{\text{nuevo intervalo}}
+{\text{intervalo original}}
+\right)
+}$$
+
+## Ejemplo 9
+
+Una entidad recibe **12 solicitudes por hora**.
+
+### Para 30 minutos
+
+Como 30 minutos equivalen a media hora:
+
+$$\lambda_{30}
+=
+12\left(\frac{30}{60}\right)$$
+
+Por tanto:
+
+$$\boxed{\lambda_{30}=6}$$
+
+### Para 15 minutos
+
+$$\lambda_{15}
+=
+12\left(\frac{15}{60}\right)$$
+
+Por tanto:
+
+$$\boxed{\lambda_{15}=3}$$
+
+### Para 2 horas
+
+$$\lambda_{2h}=12(2)$$
+
+Por tanto:
+
+$$\boxed{\lambda_{2h}=24}$$
+
+------------------------------------------------------------------------
+
+# 19. Ejemplo aplicado a Administración Pública
+
+Una oficina de atención al ciudadano recibe en promedio:
+
+$$\lambda=8$$
+
+solicitudes por hora.
+
+Por tanto:
+
+$$X\sim Poisson(8)$$
+
+## 19.1. Exactamente 5 solicitudes
+
+Queremos:
+
+$$P(X=5)$$
+
+Aplicando la fórmula:
+
+$$P(X=5)
+=
+\frac{e^{-8}8^5}{5!}$$
+
+El resultado es:
+
+$$\boxed{
+P(X=5)\approx0.0916
+}$$
+
+o:
+
+$$\boxed{9.16\%}$$
+
+------------------------------------------------------------------------
+
+## 19.2. Ninguna solicitud
+
+$$P(X=0)=e^{-8}$$
+
+Por tanto:
+
+$$\boxed{
+P(X=0)\approx0.000335
+}$$
+
+o:
+
+$$\boxed{0.0335\%}$$
+
+------------------------------------------------------------------------
+
+## 19.3. Al menos una solicitud
+
+$$P(X\geq1)=1-P(X=0)$$
+
+Por tanto:
+
+$$P(X\geq1)=1-e^{-8}$$
+
+y:
+
+$$\boxed{
+P(X\geq1)\approx99.9665\%
+}$$
+
+------------------------------------------------------------------------
+
+## 19.4. Como máximo 6 solicitudes
+
+Queremos:
+
+$$P(X\leq6)$$
+
+Entonces:
+
+$$P(X\leq6)
+=
+\sum_{x=0}^{6}
+\frac{e^{-8}8^x}{x!}$$
+
+El resultado es:
+
+$$\boxed{
+P(X\leq6)\approx0.3134
+}$$
+
+Es decir:
+
+$$\boxed{31.34\%}$$
+
+------------------------------------------------------------------------
+
+# 20. Relación entre Poisson y Binomial
+
+La distribución de Poisson puede utilizarse como una **aproximación de la distribución binomial** cuando:
+
+- $n$ es grande.
+- $p$ es pequeño.
+- El producto $np$ permanece moderado.
+
+En este caso:
+
+$$\boxed{
+\lambda=np
+}$$
+
+Por ejemplo:
+
+$$n=1000$$
+
+y:
+
+$$p=0.002$$
+
+Entonces:
+
+$$\lambda=np$$
+
+$$\lambda=(1000)(0.002)=2$$
+
+Por tanto:
+
+$$X\sim Poisson(2)$$
+
+puede utilizarse como aproximación de:
+
+$$X\sim Binomial(1000,0.002)$$
+
+------------------------------------------------------------------------
+
+# 21. Diferencias entre Binomial y Poisson
+
+| Característica       | Binomial          | Poisson                 |
+|----------------------|-------------------|-------------------------|
+| Tipo de distribución | Discreta          | Discreta                |
+| Parámetros           | $n,p$             | $\lambda$               |
+| Número de ensayos    | Fijo              | Asociado a un intervalo |
+| Resultados           | Éxito/fracaso     | Número de eventos       |
+| Media                | $np$              | $\lambda$               |
+| Varianza             | $np(1-p)$         | $\lambda$               |
+| Valores posibles     | $0,\ldots,n$      | $0,1,2,\ldots$          |
+| Aplicación           | Ensayos repetidos | Eventos en un intervalo |
+
+------------------------------------------------------------------------
+
+# 22. Principales fórmulas
+
+Para:
+
+$$\boxed{
+X\sim Poisson(\lambda)
+}$$
+
+las principales fórmulas son:
+
+### Función de probabilidad
+
+$$\boxed{
+P(X=x)=
+\frac{e^{-\lambda}\lambda^x}{x!}
+}$$
+
+### Valor esperado
+
+$$\boxed{
+E(X)=\lambda
+}$$
+
+### Varianza
+
+$$\boxed{
+Var(X)=\lambda
+}$$
+
+### Desviación estándar
+
+$$\boxed{
+\sigma=\sqrt{\lambda}
+}$$
+
+### Coeficiente de variación
+
+$$\boxed{
+CV=
+\frac{100}{\sqrt{\lambda}}\%
+}$$
+
+### Cero eventos
+
+$$\boxed{
+P(X=0)=e^{-\lambda}
+}$$
+
+### Al menos un evento
+
+$$\boxed{
+P(X\geq1)=1-e^{-\lambda}
+}$$
+
+### Como máximo $k$
+
+$$\boxed{
+P(X\leq k)=
+\sum_{x=0}^{k}
+\frac{e^{-\lambda}\lambda^x}{x!}
+}$$
+
+### Más de $k$
+
+$$\boxed{
+P(X>k)=1-P(X\leq k)
+}$$
+
+### Entre $a$ y $b$
+
+$$\boxed{
+P(a\leq X\leq b)
+=
+P(X\leq b)-P(X\leq a-1)
+}$$
+
+### Cambio de intervalo
+
+$$\boxed{
+\lambda_{nuevo}
+=
+\lambda_{original}
+\left(
+\frac{\text{nuevo intervalo}}
+{\text{intervalo original}}
+\right)
+}$$
+
+### Aproximación Binomial-Poisson
+
+$$\boxed{
+\lambda=np
+}$$
+
+------------------------------------------------------------------------
+
+# 23. Distribución de Poisson utilizando R
+
+R dispone de funciones específicas para trabajar con la distribución de Poisson.
+
+| Función   | Utilidad                         |
+|-----------|----------------------------------|
+| `dpois()` | Probabilidad puntual             |
+| `ppois()` | Probabilidad acumulada           |
+| `qpois()` | Cuantiles                        |
+| `rpois()` | Generación de valores aleatorios |
+
+## 23.1. Probabilidad puntual
+
+Para:
+
+$$P(X=5)$$
+
+cuando:
+
+$$\lambda=8$$
+
+utilizamos:
+
+```{r}
+dpois(5, lambda = 8)
+```
+
+------------------------------------------------------------------------
+
+## 23.2. Probabilidad acumulada
+
+Para:
+
+$$P(X\leq6)$$
+
+utilizamos:
+
+```{r}
+ppois(6, lambda = 8)
+```
+
+------------------------------------------------------------------------
+
+## 23.3. Probabilidad de más de 6
+
+Para:
+
+$$P(X>6)$$
+
+utilizamos:
+
+```{r}
+1 - ppois(6, lambda = 8)
+```
+
+------------------------------------------------------------------------
+
+## 23.4. Probabilidad de al menos un evento
+
+Para:
+
+$$P(X\geq1)$$
+
+podemos utilizar:
+
+```{r}
+1 - dpois(0, lambda = 8)
+```
+
+Una alternativa numéricamente más robusta es:
+
+```{r}
+ppois(0, lambda = 8, lower.tail = FALSE)
+```
+
+------------------------------------------------------------------------
+
+# 24. Simulación de una distribución de Poisson
+
+Podemos generar 100 observaciones aleatorias de una distribución:
+
+$$Poisson(8)$$
+
+utilizando:
+
+```{r}
+set.seed(123)
+
+x <- rpois(
+  n = 100,
+  lambda = 8
+)
+
+x
+```
+
+El argumento `n` indica el número de observaciones que queremos generar y `lambda` corresponde al promedio de eventos.
+
+------------------------------------------------------------------------
+
+# 25. Histograma de una distribución de Poisson
+
+```{r}
+#| fig-width: 9
+#| fig-height: 5
+
+library(ggplot2)
+
+set.seed(123)
+
+datos <- data.frame(
+  x = rpois(1000, lambda = 8)
+)
+
+ggplot(datos, aes(x = x)) +
+  geom_histogram(
+    binwidth = 1,
+    boundary = -0.5,
+    color = "black"
+  ) +
+  labs(
+    title = "Distribución de Poisson",
+    subtitle = expression(lambda == 8),
+    x = "Número de eventos",
+    y = "Frecuencia"
+  ) +
+  theme_minimal()
+```
+
+------------------------------------------------------------------------
+
+# 26. Distribución teórica de Poisson
+
+También podemos representar directamente las probabilidades teóricas.
+
+```{r}
+library(ggplot2)
+
+lambda <- 8
+
+x <- 0:20
+
+datos <- data.frame(
+  x = x,
+  probabilidad = dpois(x, lambda)
+)
+
+ggplot(
+  datos,
+  aes(
+    x = x,
+    y = probabilidad
+  )
+) +
+  geom_col() +
+  labs(
+    title = "Distribución de Poisson",
+    subtitle = expression(lambda == 8),
+    x = "Número de eventos",
+    y = "P(X = x)"
+  ) +
+  theme_minimal()
+```
+
+------------------------------------------------------------------------
+
+# 27. Comparación de diferentes valores de $\lambda$
+
+La forma de la distribución cambia cuando cambia $\lambda$.
+
+```{r}
+library(ggplot2)
+
+x <- 0:30
+
+datos <- rbind(
+  data.frame(
+    x = x,
+    probabilidad = dpois(x, 2),
+    lambda = "λ = 2"
+  ),
+  data.frame(
+    x = x,
+    probabilidad = dpois(x, 5),
+    lambda = "λ = 5"
+  ),
+  data.frame(
+    x = x,
+    probabilidad = dpois(x, 10),
+    lambda = "λ = 10"
+  )
+)
+
+ggplot(
+  datos,
+  aes(
+    x = x,
+    y = probabilidad
+  )
+) +
+  geom_col() +
+  facet_wrap(~lambda) +
+  labs(
+    title = "Distribución de Poisson para diferentes valores de λ",
+    x = "Número de eventos",
+    y = "Probabilidad"
+  ) +
+  theme_minimal()
+```
+
+------------------------------------------------------------------------
+
+# 28. Interpretación estadística
+
+La distribución de Poisson presenta una característica fundamental:
+
+$$\boxed{
+E(X)=Var(X)=\lambda
+}$$
+
+Por tanto, si:
+
+$$\lambda=16$$
+
+tenemos:
+
+$$E(X)=16$$
+
+$$Var(X)=16$$
+
+y:
+
+$$\sigma=\sqrt{16}=4$$
+
+Esta propiedad permite realizar una primera evaluación de si los datos observados pueden ser compatibles con un modelo de Poisson.
+
+------------------------------------------------------------------------
+
+# 29. Ejercicio propuesto 1
+
+Una oficina de atención al ciudadano recibe en promedio **10 usuarios por hora**.
+
+Determine:
+
+1.  La probabilidad de recibir exactamente 7 usuarios.
+2.  La probabilidad de no recibir ningún usuario.
+3.  La probabilidad de recibir al menos un usuario.
+4.  La probabilidad de recibir como máximo 8 usuarios.
+5.  La probabilidad de recibir más de 12 usuarios.
+6.  La media.
+7.  La varianza.
+8.  La desviación estándar.
+9.  El coeficiente de variación.
+
+La variable aleatoria es:
+
+$$X\sim Poisson(10)$$
+
+------------------------------------------------------------------------
+
+# 30. Ejercicio propuesto 2
+
+Una central telefónica recibe en promedio **15 llamadas cada hora**.
+
+Determine:
+
+1.  La probabilidad de recibir exactamente 12 llamadas.
+2.  La probabilidad de recibir entre 10 y 18 llamadas.
+3.  La probabilidad de recibir más de 20 llamadas.
+4.  La probabilidad de recibir menos de 5 llamadas.
+5.  La media.
+6.  La varianza.
+7.  La desviación estándar.
+
+------------------------------------------------------------------------
+
+# 31. Ejercicio propuesto 3: cambio de intervalo
+
+Una entidad pública recibe en promedio **24 solicitudes durante 2 horas**.
+
+Determine:
+
+1.  El valor de $\lambda$ para una hora.
+2.  El valor de $\lambda$ para 30 minutos.
+3.  La probabilidad de recibir exactamente 5 solicitudes durante 30 minutos.
+4.  La probabilidad de recibir al menos una solicitud durante 30 minutos.
+
+------------------------------------------------------------------------
+
+# 32. Conclusiones
+
+La distribución de Poisson es un modelo fundamental para estudiar el **número de ocurrencias de un evento durante un intervalo determinado**.
+
+Sus principales características son:
+
+1.  Es una distribución de probabilidad **discreta**.
+2.  Su único parámetro es $\lambda$.
+3.  $\lambda$ representa el número promedio de eventos.
+4.  La media es:
+
+$$E(X)=\lambda$$
+
+5.  La varianza es:
+
+$$Var(X)=\lambda$$
+
+6.  La desviación estándar es:
+
+$$\sigma=\sqrt{\lambda}$$
+
+7.  Es especialmente útil para modelar eventos que ocurren independientemente y a una tasa promedio aproximadamente constante.
+8.  Puede utilizarse como aproximación de la distribución binomial cuando $n$ es grande y $p$ es pequeño.
+9.  El parámetro $\lambda$ debe ajustarse cuando cambia el intervalo de observación.
+10. R facilita el cálculo de probabilidades mediante las funciones `dpois()`, `ppois()`, `qpois()` y `rpois()`.
+
+> **Idea fundamental:** La distribución de Poisson responde principalmente a la pregunta: **¿cuál es la probabilidad de que ocurran exactamente, como máximo, al menos o más de cierto número de eventos durante un intervalo determinado, si conocemos su tasa promedio de ocurrencia?**
