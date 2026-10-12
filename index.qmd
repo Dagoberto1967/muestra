@@ -1,5 +1,5 @@
 ---
-title: "MODELOS PROBABILISTICOS DISCRETOS"
+title: "MODELOS PRO DISCRETOS"
 subtitle: "Distribución Binomial"
 author: 
   - name: Dagoberto Salgado Horta

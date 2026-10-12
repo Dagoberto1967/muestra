@@ -2,154 +2,154 @@
   {
     "objectID": "index.html#eventos-independientes",
     "href": "index.html#eventos-independientes",
-    "title": "MODELOS PROBABILISTICOS DISCRETOS",
+    "title": "MODELOS PRO DISCRETOS",
     "section": "3.1 1.1. Eventos independientes",
     "text": "3.1 1.1. Eventos independientes\nLa ocurrencia de un evento no debe afectar directamente la ocurrencia de otro.\nPor ejemplo, la llegada de un ciudadano a una oficina pública no debería determinar que otro ciudadano llegue posteriormente."
   },
   {
     "objectID": "index.html#tasa-promedio-constante",
     "href": "index.html#tasa-promedio-constante",
-    "title": "MODELOS PROBABILISTICOS DISCRETOS",
+    "title": "MODELOS PRO DISCRETOS",
     "section": "3.2 1.2. Tasa promedio constante",
     "text": "3.2 1.2. Tasa promedio constante\nLa tasa promedio de ocurrencia debe mantenerse aproximadamente constante durante el intervalo estudiado.\nPor ejemplo:\n\nUna oficina pública recibe, en promedio, 6 solicitudes por hora.\n\nEn este caso:\n\\lambda=6"
   },
   {
     "objectID": "index.html#eventos-individuales",
     "href": "index.html#eventos-individuales",
-    "title": "MODELOS PROBABILISTICOS DISCRETOS",
+    "title": "MODELOS PRO DISCRETOS",
     "section": "3.3 1.3. Eventos individuales",
     "text": "3.3 1.3. Eventos individuales\nEn intervalos suficientemente pequeños, la probabilidad de que ocurran dos o más eventos simultáneamente debe ser muy pequeña."
   },
   {
     "objectID": "index.html#variable-discreta",
     "href": "index.html#variable-discreta",
-    "title": "MODELOS PROBABILISTICOS DISCRETOS",
+    "title": "MODELOS PRO DISCRETOS",
     "section": "3.4 1.4. Variable discreta",
     "text": "3.4 1.4. Variable discreta\nLa variable aleatoria solamente puede tomar valores enteros no negativos:\nX=0,1,2,3,\\ldots"
   },
   {
     "objectID": "index.html#paso-1.-identificar-lambda",
     "href": "index.html#paso-1.-identificar-lambda",
-    "title": "MODELOS PROBABILISTICOS DISCRETOS",
+    "title": "MODELOS PRO DISCRETOS",
     "section": "7.1 Paso 1. Identificar \\lambda",
     "text": "7.1 Paso 1. Identificar \\lambda\nTenemos:\n\\lambda=4\ny:\nx=3"
   },
   {
     "objectID": "index.html#paso-2.-aplicar-la-fórmula",
     "href": "index.html#paso-2.-aplicar-la-fórmula",
-    "title": "MODELOS PROBABILISTICOS DISCRETOS",
+    "title": "MODELOS PRO DISCRETOS",
     "section": "7.2 Paso 2. Aplicar la fórmula",
     "text": "7.2 Paso 2. Aplicar la fórmula\nP(X=3)=\n\\frac{e^{-4}4^3}{3!}\nComo:\n3!=6\nentonces:\nP(X=3)=\n\\frac{e^{-4}(64)}{6}\nPor tanto:\nP(X=3)\\approx0.1954\nEn porcentaje:\n\\boxed{P(X=3)\\approx19.54\\%}\n\n7.2.1 Interpretación\nExiste aproximadamente un 19.54 % de probabilidad de que la oficina reciba exactamente 3 solicitudes durante una hora."
   },
   {
     "objectID": "index.html#ejemplo-2",
     "href": "index.html#ejemplo-2",
-    "title": "MODELOS PROBABILISTICOS DISCRETOS",
+    "title": "MODELOS PRO DISCRETOS",
     "section": "8.1 Ejemplo 2",
     "text": "8.1 Ejemplo 2\nUna entidad recibe en promedio 5 solicitudes por hora.\n¿Cuál es la probabilidad de no recibir ninguna solicitud durante una hora?\nTenemos:\n\\lambda=5\nEntonces:\nP(X=0)=e^{-5}\nPor tanto:\nP(X=0)\\approx0.006738\nEn porcentaje:\n\\boxed{P(X=0)\\approx0.674\\%}"
   },
   {
     "objectID": "index.html#ejemplo-3",
     "href": "index.html#ejemplo-3",
-    "title": "MODELOS PROBABILISTICOS DISCRETOS",
+    "title": "MODELOS PRO DISCRETOS",
     "section": "9.1 Ejemplo 3",
     "text": "9.1 Ejemplo 3\nUna oficina recibe en promedio 3 ciudadanos por hora.\n¿Cuál es la probabilidad de recibir al menos un ciudadano durante una hora?\nTenemos:\n\\lambda=3\nEntonces:\nP(X\\geq1)=1-e^{-3}\nPor tanto:\nP(X\\geq1)\\approx0.9502\nEs decir:\n\\boxed{P(X\\geq1)\\approx95.02\\%}"
   },
   {
     "objectID": "index.html#ejemplo-4",
     "href": "index.html#ejemplo-4",
-    "title": "MODELOS PROBABILISTICOS DISCRETOS",
+    "title": "MODELOS PRO DISCRETOS",
     "section": "10.1 Ejemplo 4",
     "text": "10.1 Ejemplo 4\nUna central recibe en promedio 4 llamadas por hora.\n¿Cuál es la probabilidad de recibir como máximo 2 llamadas durante una hora?\nQueremos:\nP(X\\leq2)\nPor tanto:\nP(X\\leq2)\n=\nP(X=0)+P(X=1)+P(X=2)\nEs decir:\nP(X\\leq2)\n=\n\\frac{e^{-4}4^0}{0!}\n+\n\\frac{e^{-4}4^1}{1!}\n+\n\\frac{e^{-4}4^2}{2!}\nEl resultado es:\n\\boxed{P(X\\leq2)\\approx0.2381}\nPor tanto:\n\\boxed{P(X\\leq2)\\approx23.81\\%}"
   },
   {
     "objectID": "index.html#ejemplo-5",
     "href": "index.html#ejemplo-5",
-    "title": "MODELOS PROBABILISTICOS DISCRETOS",
+    "title": "MODELOS PRO DISCRETOS",
     "section": "11.1 Ejemplo 5",
     "text": "11.1 Ejemplo 5\nUna oficina recibe en promedio 6 ciudadanos por hora.\n¿Cuál es la probabilidad de recibir más de 8 ciudadanos durante una hora?\nTenemos:\nX\\sim Poisson(6)\nQueremos:\nP(X&gt;8)\nUtilizamos:\nP(X&gt;8)=1-P(X\\leq8)\nEl resultado es:\n\\boxed{P(X&gt;8)\\approx0.1528}\nEs decir:\n\\boxed{15.28\\%}"
   },
   {
     "objectID": "index.html#ejemplo-6",
     "href": "index.html#ejemplo-6",
-    "title": "MODELOS PROBABILISTICOS DISCRETOS",
+    "title": "MODELOS PRO DISCRETOS",
     "section": "12.1 Ejemplo 6",
     "text": "12.1 Ejemplo 6\nSupongamos:\nX\\sim Poisson(5)\n¿Cuál es la probabilidad de que ocurran entre 3 y 7 eventos?\nQueremos:\nP(3\\leq X\\leq7)\nUtilizamos:\nP(3\\leq X\\leq7)\n=\nP(X\\leq7)-P(X\\leq2)\nEl resultado es aproximadamente:\n\\boxed{P(3\\leq X\\leq7)\\approx0.8664}\nPor tanto:\n\\boxed{P(3\\leq X\\leq7)\\approx86.64\\%}"
   },
   {
     "objectID": "index.html#ejemplo-7",
     "href": "index.html#ejemplo-7",
-    "title": "MODELOS PROBABILISTICOS DISCRETOS",
+    "title": "MODELOS PRO DISCRETOS",
     "section": "16.1 Ejemplo 7",
     "text": "16.1 Ejemplo 7\nSi:\n\\lambda=25\nentonces:\nCV=\n\\frac{100}{\\sqrt{25}}\nCV=\n\\frac{100}{5}\nPor tanto:\n\\boxed{CV=20\\%}"
   },
   {
     "objectID": "index.html#ejemplo-8",
     "href": "index.html#ejemplo-8",
-    "title": "MODELOS PROBABILISTICOS DISCRETOS",
+    "title": "MODELOS PRO DISCRETOS",
     "section": "19.1 Ejemplo 8",
     "text": "19.1 Ejemplo 8\nUna oficina recibe:\n\n4 solicitudes por hora durante la mañana.\n3 solicitudes por hora durante la tarde.\n\nEntonces:\nX_1\\sim Poisson(4)\ny:\nX_2\\sim Poisson(3)\nSi son independientes:\nX_1+X_2\\sim Poisson(4+3)\npor tanto:\n\\boxed{\nX_1+X_2\\sim Poisson(7)\n}"
   },
   {
     "objectID": "index.html#ejemplo-9",
     "href": "index.html#ejemplo-9",
-    "title": "MODELOS PROBABILISTICOS DISCRETOS",
+    "title": "MODELOS PRO DISCRETOS",
     "section": "20.1 Ejemplo 9",
     "text": "20.1 Ejemplo 9\nUna entidad recibe 12 solicitudes por hora.\n\n20.1.1 Para 30 minutos\nComo 30 minutos equivalen a media hora:\n\\lambda_{30}\n=\n12\\left(\\frac{30}{60}\\right)\nPor tanto:\n\\boxed{\\lambda_{30}=6}\n\n\n20.1.2 Para 15 minutos\n\\lambda_{15}\n=\n12\\left(\\frac{15}{60}\\right)\nPor tanto:\n\\boxed{\\lambda_{15}=3}\n\n\n20.1.3 Para 2 horas\n\\lambda_{2h}=12(2)\nPor tanto:\n\\boxed{\\lambda_{2h}=24}"
   },
   {
     "objectID": "index.html#exactamente-5-solicitudes",
     "href": "index.html#exactamente-5-solicitudes",
-    "title": "MODELOS PROBABILISTICOS DISCRETOS",
+    "title": "MODELOS PRO DISCRETOS",
     "section": "21.1 19.1. Exactamente 5 solicitudes",
     "text": "21.1 19.1. Exactamente 5 solicitudes\nQueremos:\nP(X=5)\nAplicando la fórmula:\nP(X=5)\n=\n\\frac{e^{-8}8^5}{5!}\nEl resultado es:\n\\boxed{\nP(X=5)\\approx0.0916\n}\no:\n\\boxed{9.16\\%}"
   },
   {
     "objectID": "index.html#ninguna-solicitud",
     "href": "index.html#ninguna-solicitud",
-    "title": "MODELOS PROBABILISTICOS DISCRETOS",
+    "title": "MODELOS PRO DISCRETOS",
     "section": "21.2 19.2. Ninguna solicitud",
     "text": "21.2 19.2. Ninguna solicitud\nP(X=0)=e^{-8}\nPor tanto:\n\\boxed{\nP(X=0)\\approx0.000335\n}\no:\n\\boxed{0.0335\\%}"
   },
   {
     "objectID": "index.html#al-menos-una-solicitud",
     "href": "index.html#al-menos-una-solicitud",
-    "title": "MODELOS PROBABILISTICOS DISCRETOS",
+    "title": "MODELOS PRO DISCRETOS",
     "section": "21.3 19.3. Al menos una solicitud",
     "text": "21.3 19.3. Al menos una solicitud\nP(X\\geq1)=1-P(X=0)\nPor tanto:\nP(X\\geq1)=1-e^{-8}\ny:\n\\boxed{\nP(X\\geq1)\\approx99.9665\\%\n}"
   },
   {
     "objectID": "index.html#como-máximo-6-solicitudes",
     "href": "index.html#como-máximo-6-solicitudes",
-    "title": "MODELOS PROBABILISTICOS DISCRETOS",
+    "title": "MODELOS PRO DISCRETOS",
     "section": "21.4 19.4. Como máximo 6 solicitudes",
     "text": "21.4 19.4. Como máximo 6 solicitudes\nQueremos:\nP(X\\leq6)\nEntonces:\nP(X\\leq6)\n=\n\\sum_{x=0}^{6}\n\\frac{e^{-8}8^x}{x!}\nEl resultado es:\n\\boxed{\nP(X\\leq6)\\approx0.3134\n}\nEs decir:\n\\boxed{31.34\\%}"
   },
   {
     "objectID": "index.html#probabilidad-puntual",
     "href": "index.html#probabilidad-puntual",
-    "title": "MODELOS PROBABILISTICOS DISCRETOS",
+    "title": "MODELOS PRO DISCRETOS",
     "section": "25.1 23.1. Probabilidad puntual",
     "text": "25.1 23.1. Probabilidad puntual\nPara:\nP(X=5)\ncuando:\n\\lambda=8\nutilizamos:\n\n\nVer código\ndpois(5, lambda = 8)\n\n\n[1] 0.09160366"
   },
   {
     "objectID": "index.html#probabilidad-acumulada-1",
     "href": "index.html#probabilidad-acumulada-1",
-    "title": "MODELOS PROBABILISTICOS DISCRETOS",
+    "title": "MODELOS PRO DISCRETOS",
     "section": "25.2 23.2. Probabilidad acumulada",
     "text": "25.2 23.2. Probabilidad acumulada\nPara:\nP(X\\leq6)\nutilizamos:\n\n\nVer código\nppois(6, lambda = 8)\n\n\n[1] 0.3133743"
   },
   {
     "objectID": "index.html#probabilidad-de-más-de-6",
     "href": "index.html#probabilidad-de-más-de-6",
-    "title": "MODELOS PROBABILISTICOS DISCRETOS",
+    "title": "MODELOS PRO DISCRETOS",
     "section": "25.3 23.3. Probabilidad de más de 6",
     "text": "25.3 23.3. Probabilidad de más de 6\nPara:\nP(X&gt;6)\nutilizamos:\n\n\nVer código\n1 - ppois(6, lambda = 8)\n\n\n[1] 0.6866257"
   },
   {
     "objectID": "index.html#probabilidad-de-al-menos-un-evento-1",
     "href": "index.html#probabilidad-de-al-menos-un-evento-1",
-    "title": "MODELOS PROBABILISTICOS DISCRETOS",
+    "title": "MODELOS PRO DISCRETOS",
     "section": "25.4 23.4. Probabilidad de al menos un evento",
     "text": "25.4 23.4. Probabilidad de al menos un evento\nPara:\nP(X\\geq1)\npodemos utilizar:\n\n\nVer código\n1 - dpois(0, lambda = 8)\n\n\n[1] 0.9996645\n\n\nUna alternativa numéricamente más robusta es:\n\n\nVer código\nppois(0, lambda = 8, lower.tail = FALSE)\n\n\n[1] 0.9996645"
   },
